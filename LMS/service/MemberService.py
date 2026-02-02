@@ -170,3 +170,8 @@ class MemberService:
                 Session.logout()
         finally:
             conn.close()
+
+
+
+
+
