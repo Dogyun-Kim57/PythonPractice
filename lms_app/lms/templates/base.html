@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "LMS" }}</title>
+</head>
+<body>
+<h1><a href="/">LMS</a></h1>
+<div>
+  {% if session.get("user") %}
+  <b>{{ session["user"]["name"] }}</b> 님 (role={{ session["user"]["role"] }})
+  | <a href="/auth/logout">로그아웃</a>
+  {% else %}
+  <a href="/auth/login">로그인</a>
+  | <a href="/auth/register">회원가입</a>
+  {% endif %}
+</div>
+<hr>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul>
+  {% for category, msg in messages %}
+  <li>[{{ category }}] {{ msg }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<hr>
+{% block content %}{% endblock %}
+</body>
+</html>

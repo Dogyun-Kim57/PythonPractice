@@ -1,0 +1,25 @@
+import pymysql
+from flask import current_app, g
+
+def get_conn():
+    """
+    - 요청(request)당 DB 연결 1개만 만들고 g에 캐싱
+    - 같은 요청에서 여러 번 연결 만들지 않게 함
+    """
+    if "db_conn" not in g:
+        g.db_conn = pymysql.connect(
+            host=current_app.config["DB_HOST"],
+            port=current_app.config["DB_PORT"],
+            user=current_app.config["DB_USER"],
+            password=current_app.config["DB_PASSWORD"],
+            database=current_app.config["DB_NAME"],   # ✅ PDB로 연결됨
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=False,
+        )
+    return g.db_conn
+
+def close_conn(e=None):
+    conn = g.pop("db_conn", None)
+    if conn:
+        conn.close()

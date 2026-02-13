@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>회원가입</h2>
+
+<form method="post" action="/auth/register">
+  <div>
+    <label>아이디(uid)</label><br>
+    <input name="uid" required maxlength="50">
+  </div>
+
+  <div>
+    <label>비밀번호</label><br>
+    <input name="pw" type="password" required>
+  </div>
+
+  <div>
+    <label>이름</label><br>
+    <input name="name" required maxlength="50">
+  </div>
+
+  <div>
+    <label>관리자 코드(선택)</label><br>
+    <input name="admin_code">
+  </div>
+
+  <button type="submit">가입</button>
+</form>
+{% endblock %}

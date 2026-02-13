@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>로그인</h2>
+
+<form method="post" action="/auth/login">
+  <div>
+    <label>아이디(uid)</label><br>
+    <input name="uid" required>
+  </div>
+
+  <div>
+    <label>비밀번호</label><br>
+    <input name="pw" type="password" required>
+  </div>
+
+  <button type="submit">로그인</button>
+</form>
+
+<p style="margin-top:10px;">
+  아직 계정이 없으면 <a href="/auth/register">회원가입</a>
+</p>
+{% endblock %}

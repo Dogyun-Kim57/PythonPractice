@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row g-3">
+  <div class="col-12">
+    <div class="p-4 bg-light border rounded-3">
+      <h2 class="mb-1">LMS 홈</h2>
+      <p class="mb-0 text-muted">
+        지금은 뼈대(인증/세션/DB연결)를 복습하면서 확장하는 단계입니다.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">인증 상태</h5>
+        {% if session.get("user") %}
+          <p class="card-text">
+            로그인됨: <b>{{ session["user"]["uid"] }}</b><br>
+            권한: <b>{{ session["user"]["role"] }}</b>
+          </p>
+        {% else %}
+          <p class="card-text">현재 로그아웃 상태입니다.</p>
+        {% endif %}
+      </div>
+      <div class="card-footer bg-white">
+        {% if session.get("user") %}
+          <a class="btn btn-outline-secondary btn-sm" href="/auth/logout">로그아웃</a>
+        {% else %}
+          <a class="btn btn-primary btn-sm" href="/auth/login">로그인</a>
+          <a class="btn btn-outline-primary btn-sm" href="/auth/register">회원가입</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">개발 체크</h5>
+        <ul class="mb-0">
+          <li><a href="/auth/whoami">DB 연결 확인(whoami)</a></li>
+          <li><a href="/auth/ping">Blueprint ping</a></li>
+        </ul>
+      </div>
+      <div class="card-footer bg-white">
+        <span class="text-muted small">디버깅 루트는 나중에 숨길 예정</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
